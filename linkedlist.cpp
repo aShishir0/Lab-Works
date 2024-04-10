@@ -9,15 +9,6 @@ Linkedlist :: Linkedlist(){
     head = nullptr;
     tail = nullptr;
 }
-Linkedlist::~Linkedlist(){
-    Node *current = head;
-    Node *next;
-    while(current != nullptr){
-        next = current->next;
-        delete current;
-        current = next;
-    }
-}
 void Linkedlist ::add_to_head(int data){
     Node *new_node = new Node(data);
     new_node->data = data;
@@ -46,6 +37,24 @@ void Linkedlist :: traverse(){
     while(p!= NULL){
         cout<<p->info<<endl;
         p = p->next;
+    }
+}
+void Linkedlist :: remove_from_tail(){
+    if(!isEmpty){
+        Node *node_to_delete = tail;
+        if(head == tail){
+            head == NULL;
+            tail == NULL;
+        }
+        else{
+            Node * pred = head;
+            while(pred->next!= tail){
+                pred = pred->next;
+            }
+            tail = pred;
+            pred->next = NULL;
+        }
+        delete node_to_delete;
     }
 }
 

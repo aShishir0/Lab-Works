@@ -20,5 +20,6 @@ class Linkedlist{
         void add_to_tail(int data);
         bool isEmpty();
         void traverse();
+        void remove_from_tail();
         void delete_node(int data);
 };
