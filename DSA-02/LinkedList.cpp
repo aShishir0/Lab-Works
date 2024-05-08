@@ -53,10 +53,11 @@ void LinkedList::addToTail(int data)
     }
 }
 
-bool LinkedList::removeFromHead(int &data)
+int LinkedList::removeFromHead()
 {
     if (!isEmpty())
     {
+        int data;
         Node *nodeToDelete = HEAD;
         data = HEAD->data;
         HEAD = HEAD->next;
@@ -65,16 +66,17 @@ bool LinkedList::removeFromHead(int &data)
         {
             TAIL = nullptr;
         }
-        return true;
+        return data;
     }
     else
     {
-        return false;
+        return NULL;
     }
 }
 
-bool LinkedList::removeFromTail(int &data)
+int LinkedList::removeFromTail()
 {
+    int data;
     if (isEmpty())
     {
         return false;
@@ -100,7 +102,7 @@ bool LinkedList::removeFromTail(int &data)
     delete TAIL;
     TAIL = t;
     TAIL->next = nullptr;
-    return true;
+    return data;
 }
 
 void LinkedList::Traverse()
@@ -127,7 +129,7 @@ bool LinkedList::remove(int &data)
 
     if (HEAD->data == data)
     {
-        return removeFromHead(data);
+        return removeFromHead();
     }
 
     Node *p = HEAD;
@@ -142,7 +144,7 @@ bool LinkedList::remove(int &data)
     {
         if (p == TAIL)
         {
-            return removeFromTail(data);
+            return removeFromTail();
         }
         else
         {
