@@ -10,6 +10,6 @@ int LinkedListStack :: pop(){
     stack.removeFromHead();
 }
 
-int LinkedListStack :: top(){
-    return ;
+bool LinkedListStack :: isEmpty(){
+    stack.isEmpty();
 }
