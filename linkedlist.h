@@ -1,25 +1,31 @@
+#include <iostream>
 
-class Node{
-    public:
-        int info;
-        Node * next;
+class Node
+{
+public:
+    int data;
+    Node *next;
 
-        Node(){}
-        Node(int d):info(d), next(nullptr) {}
-        Node (int d, Node * next) : info(d), next(next) {}
+    Node() {}
+    Node(int d) : data(d), next(nullptr) {}
+    Node(int d, Node *next) : data(d), next(next) {}
 };
 
-class Linkedlist{
-    private:
-        Node *head;
-        Node *tail;
-    public:
-        Linkedlist();
-        ~Linkedlist();
-        void add_to_head(int data);
-        void add_to_tail(int data);
-        bool isEmpty();
-        void traverse();
-        void remove_from_tail();
-        void delete_node(int data);
+class LinkedList
+{
+private:
+    Node *HEAD;
+    Node *TAIL;
+
+public:
+    LinkedList();
+
+    void add(Node *pred, int data);
+    void addToHead(int data);
+    void addToTail(int data);
+    void Traverse();
+    bool remove(int &data);
+    bool removeFromHead(int &data);
+    bool removeFromTail(int &data);
+    bool isEmpty();
 };
