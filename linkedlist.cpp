@@ -1,60 +1,157 @@
-#include "linkedlist.h"
-#include <iostream>
+#include "LinkedList.h"
 
-Node::Node(int data){
-    this->data = data;
-    next = nullptr;
+
+LinkedList::LinkedList() : HEAD(nullptr), TAIL(nullptr) {}
+
+bool LinkedList::isEmpty()
+{
+    return HEAD == nullptr;
 }
-Linkedlist :: Linkedlist(){
-    head = nullptr;
-    tail = nullptr;
+
+void LinkedList::add(Node *pred, int data)
+{
+    Node *newNode = new Node;
+    newNode->data = data;
+    newNode->next = pred->next;
+    pred->next = newNode;
 }
-void Linkedlist ::add_to_head(int data){
-    Node *new_node = new Node(data);
-    new_node->data = data;
-    new_node->next = head;
-    head = n;
-    if(tail == NULL){
-        tail = new_node;
+
+void LinkedList::addToHead(int data)
+{
+    Node *newNode = new Node;
+    if (!isEmpty())
+    {
+        newNode->data = data;
+        newNode->next = HEAD;
+        HEAD = newNode;
+    }
+    else
+    {
+        newNode->data = data;
+        newNode->next = nullptr;
+        HEAD = newNode;
+        TAIL = HEAD;
     }
 }
-void Linkedlist ::add_to_tail(int data){
-    Node *new_node = new Node(data);
-    new_node->data = data;
-    if(tail != NULL){
-        tail->next = new_node;
+
+void LinkedList::addToTail(int data)
+{
+    Node *newNode = new Node;
+    if (!isEmpty())
+    {
+        newNode->data = data;
+        newNode->next = nullptr;
+        TAIL->next = newNode;
+        TAIL = newNode;
     }
-    tail = new_node;
-    if(head == NULL){
-        head = new_node;
+    else
+    {
+        newNode->data = data;
+        newNode->next = nullptr;
+        TAIL = newNode;
+        HEAD = TAIL;
     }
 }
-bool Linkedlist :: isEmpty(){
-    return head == NULL;
+
+bool LinkedList::removeFromHead(int &data)
+{
+    if (!isEmpty())
+    {
+        Node *nodeToDelete = HEAD;
+        data = HEAD->data;
+        HEAD = HEAD->next;
+        delete nodeToDelete;
+        if (isEmpty())
+        {
+            TAIL = nullptr;
+        }
+        return true;
+    }
+    else
+    {
+        return false;
+    }
 }
-void Linkedlist :: traverse(){
-    Node *p = head;
-    while(p!= NULL){
-        cout<<p->info<<endl;
+
+bool LinkedList::removeFromTail(int &data)
+{
+    if (isEmpty())
+    {
+        return false;
+    }
+
+    if (HEAD == TAIL)
+    {
+        data = HEAD->data;
+        delete HEAD;
+        HEAD = TAIL = nullptr;
+        return true;
+    }
+
+    Node *p = HEAD;
+    Node *t = nullptr;
+    while (p != TAIL)
+    {
+        t = p;
         p = p->next;
     }
+
+    data = TAIL->data;
+    delete TAIL;
+    TAIL = t;
+    TAIL->next = nullptr;
+    return true;
 }
-void Linkedlist :: remove_from_tail(){
-    if(!isEmpty){
-        Node *node_to_delete = tail;
-        if(head == tail){
-            head == NULL;
-            tail == NULL;
+
+void LinkedList::Traverse()
+{
+    Node *p = HEAD;
+    if (!isEmpty())
+    {
+        std::cout << "The contents of the list are :  ";
+        while (p != NULL)
+        {
+            std::cout << p->data;
+            std::cout << "  ";
+            p = p->next;
         }
-        else{
-            Node * pred = head;
-            while(pred->next!= tail){
-                pred = pred->next;
-            }
-            tail = pred;
-            pred->next = NULL;
-        }
-        delete node_to_delete;
     }
 }
 
+bool LinkedList::remove(int &data)
+{
+    if (isEmpty())
+    {
+        return false;
+    }
+
+    if (HEAD->data == data)
+    {
+        return removeFromHead(data);
+    }
+
+    Node *p = HEAD;
+    Node *temp = nullptr;
+    while (p->next != nullptr && p->data != data)
+    {
+        temp = p;
+        p = p->next;
+    }
+
+    if (p->data == data)
+    {
+        if (p == TAIL)
+        {
+            return removeFromTail(data);
+        }
+        else
+        {
+            Node *nodeToDelete = p;
+            temp->next = p->next;
+            delete nodeToDelete;
+            return true;
+        }
+    }
+
+    return false;
+}
