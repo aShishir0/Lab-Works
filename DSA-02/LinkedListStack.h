@@ -1,6 +1,9 @@
 #include "stack.h"
 #include "LinkedList.h"
 
+#ifndef LINKEDLISTSTACK_H
+#define LINKEDLISTSTACK_H
+
 class LinkedListStack : public Istack{
     protected:
         LinkedList stack;
@@ -10,3 +13,5 @@ class LinkedListStack : public Istack{
         int top();
         bool isEmpty();
 };
+
+#endif

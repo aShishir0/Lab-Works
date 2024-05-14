@@ -1,6 +1,4 @@
-#include "stack.h"
 #include "LinkedListStack.h"
-#include "LinkedList.h"
 
 void LinkedListStack :: push(int data){
     stack.addToHead(data);
@@ -12,4 +10,7 @@ int LinkedListStack :: pop(){
 
 bool LinkedListStack :: isEmpty(){
     stack.isEmpty();
+}
+int LinkedListStack :: top(){
+    std::cout<<stack.HEAD->data;
 }

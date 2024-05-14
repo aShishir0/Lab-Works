@@ -1,4 +1,6 @@
 #include <iostream>
+#ifndef LINKEDLIST_H
+#define LINKEDLIST_H
 
 class Node
 {
@@ -13,7 +15,7 @@ public:
 
 class LinkedList
 {
-private:
+public:
     Node *HEAD;
     Node *TAIL;
 
@@ -29,3 +31,5 @@ public:
     int removeFromTail();
     bool isEmpty();
 };
+
+#endif

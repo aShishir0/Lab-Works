@@ -1,4 +1,6 @@
 #include<iostream>
+#ifndef STACK_H
+#define STACK_H
 
 class Istack{
     public:
@@ -9,3 +11,5 @@ class Istack{
         virtual int top() = 0;
         virtual bool isEmpty() = 0;
 };
+
+#endif
