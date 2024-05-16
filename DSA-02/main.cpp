@@ -3,13 +3,13 @@
 using namespace std;
 
 int main(){
-    LinkedListStack stack;
-    stack.push(1);
-    stack.pop();
-    stack.isEmpty();
-    stack.push(2);
-    stack.push(3);
-    stack.push(4);
-    stack.top();
+    Istack *st = new LinkedListStack;
+    st->push(1);
+    st->pop();
+    st->isEmpty();
+    st->push(2);
+    st->push(3);
+    st->push(4);
+    st->top();
 
 }

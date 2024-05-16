@@ -1,16 +1,15 @@
 #include "LinkedList.cpp"
+using namespace std;
 
 int main()
 {
     LinkedList trial;
-    int x;
+    trial.isEmpty();
+    trial.addToHead(1);
     trial.addToHead(2);
-    trial.addToHead(7);
-    trial.addToHead(9);
+    trial.addToHead(3);
     trial.addToTail(0);
     trial.Traverse();
-    trial.removeFromTail(x);
-    std::cout << "\n"
-              << x << std::endl;
+    cout<<trial.removeFromTail()<<" is removed"<<endl;
     trial.Traverse();
 }

@@ -70,7 +70,7 @@ int LinkedList::removeFromHead()
     }
     else
     {
-        return NULL;
+        return -1;
     }
 }
 
@@ -87,7 +87,7 @@ int LinkedList::removeFromTail()
         data = HEAD->data;
         delete HEAD;
         HEAD = TAIL = nullptr;
-        return true;
+        return data;
     }
 
     Node *p = HEAD;

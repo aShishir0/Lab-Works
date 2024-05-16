@@ -21,6 +21,7 @@ public:
 
 public:
     LinkedList();
+    ~LinkedList(){}
 
     void add(Node *pred, int data);
     void addToHead(int data);

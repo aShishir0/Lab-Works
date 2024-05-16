@@ -5,12 +5,15 @@ void LinkedListStack :: push(int data){
 }
 
 int LinkedListStack :: pop(){
-    stack.removeFromHead();
+    return stack.removeFromHead();
 }
 
 bool LinkedListStack :: isEmpty(){
-    stack.isEmpty();
+    return stack.isEmpty();
 }
 int LinkedListStack :: top(){
-    std::cout<<stack.HEAD->data;
+    if (!isEmpty()){
+        return (stack.HEAD)->data;
+    }
+    return -1;
 }

@@ -5,7 +5,14 @@ LinkedList::LinkedList() : HEAD(nullptr), TAIL(nullptr) {}
 
 bool LinkedList::isEmpty()
 {
-    return HEAD == nullptr;
+    if(HEAD == nullptr){
+        std::cout<<"The list is empty"<<std::endl;
+        return true;
+    }
+    else{
+        return false;
+    }
+    
 }
 
 void LinkedList::add(Node *pred, int data)
@@ -53,8 +60,9 @@ void LinkedList::addToTail(int data)
     }
 }
 
-bool LinkedList::removeFromHead(int &data)
+int LinkedList::removeFromHead()
 {
+    int data;
     if (!isEmpty())
     {
         Node *nodeToDelete = HEAD;
@@ -65,19 +73,20 @@ bool LinkedList::removeFromHead(int &data)
         {
             TAIL = nullptr;
         }
-        return true;
+        return data;
     }
     else
     {
-        return false;
+        return -1;
     }
 }
 
-bool LinkedList::removeFromTail(int &data)
+int LinkedList::removeFromTail()
 {
+    int data;
     if (isEmpty())
     {
-        return false;
+        return -1;
     }
 
     if (HEAD == TAIL)
@@ -85,22 +94,24 @@ bool LinkedList::removeFromTail(int &data)
         data = HEAD->data;
         delete HEAD;
         HEAD = TAIL = nullptr;
-        return true;
+        return data;
     }
 
-    Node *p = HEAD;
-    Node *t = nullptr;
-    while (p != TAIL)
-    {
-        t = p;
-        p = p->next;
-    }
+    else{
+        Node *p = HEAD;
+        Node *t = nullptr;
+        while (p != TAIL)
+        {
+            t = p;
+            p = p->next;
+        }
 
-    data = TAIL->data;
-    delete TAIL;
-    TAIL = t;
-    TAIL->next = nullptr;
-    return true;
+        data = TAIL->data;
+        delete TAIL;
+        TAIL = t;
+        TAIL->next = nullptr;
+        return data;
+    }
 }
 
 void LinkedList::Traverse()
@@ -115,6 +126,7 @@ void LinkedList::Traverse()
             std::cout << "  ";
             p = p->next;
         }
+        std::cout<<std::endl;
     }
 }
 
@@ -127,7 +139,7 @@ bool LinkedList::remove(int &data)
 
     if (HEAD->data == data)
     {
-        return removeFromHead(data);
+        return removeFromHead();
     }
 
     Node *p = HEAD;
@@ -142,7 +154,7 @@ bool LinkedList::remove(int &data)
     {
         if (p == TAIL)
         {
-            return removeFromTail(data);
+            return removeFromTail();
         }
         else
         {

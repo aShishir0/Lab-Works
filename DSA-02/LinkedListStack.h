@@ -8,6 +8,8 @@ class LinkedListStack : public Istack{
     protected:
         LinkedList stack;
     public:
+        LinkedListStack(){}
+        ~LinkedListStack(){}
         void push(int);
         int pop();
         int top();
