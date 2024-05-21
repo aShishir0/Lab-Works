@@ -1,19 +1,53 @@
-#include "LinkedListStack.h"
+#include "iStack.h"
+#include "LinkedList.h"
+#include <iostream>
 
-void LinkedListStack :: push(int data){
-    stack.addToHead(data);
-}
+LinkedListStack::LinkedListStack() {}
+LinkedListStack::~LinkedListStack() {}
 
-int LinkedListStack :: pop(){
-    return stack.removeFromHead();
-}
+bool LinkedListStack::isEmpty()
+{
+    if (list.isEmpty())
+    {
 
-bool LinkedListStack :: isEmpty(){
-    return stack.isEmpty();
-}
-int LinkedListStack :: top(){
-    if (!isEmpty()){
-        return (stack.HEAD)->data;
+        return true;
     }
-    return -1;
+    else
+        return false;
 }
+
+bool LinkedListStack::push(int data)
+{
+    list.addToHead(data);
+}
+
+void LinkedListStack::pop(int &data)
+{
+    if (!isEmpty())
+    {
+        list.removeFromHead(data);
+    }
+    else
+        std::cout << "The Stack is empty \n";
+}
+
+void LinkedListStack::top(int &data)
+{
+    if (!isEmpty())
+    {
+        list.HeadReturn(data);
+    }
+}
+
+void LinkedListStack::traverse()
+{
+    if (!isEmpty())
+    {
+        
+        list.Traverse();
+    
+    }
+    else
+        std::cout << "The Stack is empty";
+}
+

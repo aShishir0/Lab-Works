@@ -1,5 +1,5 @@
 #include "LinkedList.h"
-
+#include <iostream>
 
 LinkedList::LinkedList() : HEAD(nullptr), TAIL(nullptr) {}
 
@@ -21,6 +21,7 @@ void LinkedList::addToHead(int data)
     Node *newNode = new Node;
     if (!isEmpty())
     {
+
         newNode->data = data;
         newNode->next = HEAD;
         HEAD = newNode;
@@ -39,6 +40,7 @@ void LinkedList::addToTail(int data)
     Node *newNode = new Node;
     if (!isEmpty())
     {
+
         newNode->data = data;
         newNode->next = nullptr;
         TAIL->next = newNode;
@@ -53,11 +55,10 @@ void LinkedList::addToTail(int data)
     }
 }
 
-int LinkedList::removeFromHead()
+bool LinkedList::removeFromHead(int &data)
 {
     if (!isEmpty())
     {
-        int data;
         Node *nodeToDelete = HEAD;
         data = HEAD->data;
         HEAD = HEAD->next;
@@ -66,28 +67,27 @@ int LinkedList::removeFromHead()
         {
             TAIL = nullptr;
         }
-        return data;
+        return true;
     }
     else
     {
-        return -1;
+        return false;
     }
 }
 
-int LinkedList::removeFromTail()
+bool LinkedList::removeFromTail(int &data)
 {
-    int data;
     if (isEmpty())
     {
         return false;
     }
 
     if (HEAD == TAIL)
-    {
+    { // Only one node in the list
         data = HEAD->data;
         delete HEAD;
         HEAD = TAIL = nullptr;
-        return data;
+        return true;
     }
 
     Node *p = HEAD;
@@ -102,7 +102,7 @@ int LinkedList::removeFromTail()
     delete TAIL;
     TAIL = t;
     TAIL->next = nullptr;
-    return data;
+    return true;
 }
 
 void LinkedList::Traverse()
@@ -120,6 +120,27 @@ void LinkedList::Traverse()
     }
 }
 
+void LinkedList::reverse()
+{
+    if (!isEmpty())
+    {
+        Node *current = HEAD;
+        Node *prev = NULL, *next = NULL;
+
+        while (current != NULL)
+        {
+            // Store next
+            next = current->next;
+            // Reverse the node pointer for the current node
+            current->next = prev;
+            // Advance the pointer one position.
+            prev = current;
+            current = next;
+        }
+        HEAD = prev;
+    }
+}
+
 bool LinkedList::remove(int &data)
 {
     if (isEmpty())
@@ -129,7 +150,7 @@ bool LinkedList::remove(int &data)
 
     if (HEAD->data == data)
     {
-        return removeFromHead();
+        return removeFromHead(data);
     }
 
     Node *p = HEAD;
@@ -144,7 +165,7 @@ bool LinkedList::remove(int &data)
     {
         if (p == TAIL)
         {
-            return removeFromTail();
+            return removeFromTail(data);
         }
         else
         {
@@ -157,3 +178,17 @@ bool LinkedList::remove(int &data)
 
     return false;
 }
+
+void LinkedList::HeadReturn(int &element)
+{
+    if (!isEmpty())
+        element = HEAD->data;
+}
+
+bool LinkedList::TailReturn(int &element)
+{
+    if (!isEmpty())
+        element = TAIL->data;
+    return true;
+}
+
